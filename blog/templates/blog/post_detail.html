@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+{% block content %}
+<!-- object => is the default variable name for itrate single post -->
+<div class="container">
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="row">
+                <div class="col-md-2">
+                 <img class="rounded-circle article-img" 
+                 src="{{ object.author.profile.image.url }}">
+             </div>
+             <div class="col-md-10">
+                <div class="article-metadata">
+                    <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{object.author}}</a>
+                    <small class="text-muted">{{object.date_posted|date:"F d, Y "}}</small>
+                <div>
+                    {% if object.author == user  %}
+                 <a href="{% url 'post-update' object.id %}" class="btn btn-outline-secondary btn-sm mt-1 mb-1 " >Update</a>
+                  <a href="{% url 'post-delete' object.id %}" class="btn btn-outline-danger btn-sm mt-1 mb-1" >Delete</a>
+                {% endif %}
+                </div>
+                </div>
+                <h2 class="article-title">{{object.title}}</h2>
+                <p class="article-content">{{object.content}}</p>
+                
+            </div>
+        </div>
+    </div>
+</article>
+</div>
+
+{% endblock content %}
